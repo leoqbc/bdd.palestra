@@ -1,0 +1,8 @@
+default:
+  translation:
+      locale: pt-BR
+  extensions:
+    Behat\MinkExtension:
+      base_url: 'http://localhost'
+      selenium2:
+         wd_host: 'localhost:4444/wd/hub'
