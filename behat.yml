@@ -1,6 +1,6 @@
 default:
   translation:
-      locale: pt-BR
+      locale: pt
   extensions:
     Behat\MinkExtension:
       base_url: 'http://localhost'

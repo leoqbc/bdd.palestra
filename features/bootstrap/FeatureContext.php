@@ -21,4 +21,60 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
     public function __construct()
     {
     }
+
+    /**
+     * @BeforeScenario
+     */
+    public function resize()
+    {
+        $session = $this->getSession();
+        $session->resizeWindow(1440, 900, 'current');
+    }
+
+    /**
+     * @Given (Eu) aguardo :arg1 segundo(s)
+     */
+    public function aguardoSegundos($arg1)
+    {
+        sleep($arg1);
+    }
+
+    /**
+     * @Given (Eu) busco no google :arg1
+     */
+    public function busca($arg1)
+    {
+        $this->visit("http://google.com.br");
+        $this->fillField('q', 'behat php');
+        $this->aguardoSegundos(5);
+        $this->clickLink('Behat Documentation');
+        $this->assertPageContainsText('Behat Documentation');
+    }
+
+    public function spin ($func, $timeout=5)
+    {
+        for ($i = 0; $i < $timeout; $i++) {
+            try {
+                if ($result = $func($this)) {
+                    return $result;
+                }
+            } catch (Exception $e) {
+                // tratar exception
+            }
+            sleep(1);
+        }
+        throw new Exception('Timeout elemento não encontrado');
+    }
+
+    /**
+     * @Then devo visualizar :arg1
+     */
+    public function devoVisualizar($arg1)
+    {
+        $this->spin(function ($this) use ($arg1) {
+            $page = $this->getSession()->getPage();
+            $success = $page->find('css', '#success');
+            return $success->isVisible();
+        });
+    }
 }
