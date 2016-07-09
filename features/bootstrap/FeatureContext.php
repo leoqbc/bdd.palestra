@@ -71,10 +71,25 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
      */
     public function devoVisualizar($arg1)
     {
-        $this->spin(function ($this) use ($arg1) {
-            $page = $this->getSession()->getPage();
-            $success = $page->find('css', '#success');
+        $page = $this->getSession()->getPage();
+        $success = $page->find('css', '#success');
+        
+        $this->spin(function () use ($success) {
             return $success->isVisible();
         });
+
+        if ($success->getText() != $arg1) {
+            throw new Exception('Texto não confere');
+        }
+    }
+
+    /**
+     * @Then rodo um javascript aqui
+     */
+    public function javascriptTeste()
+    {
+        $session = $this->getSession();
+        $session->executeScript("alert('Aeee BARBA!!!')");
+        // echo $session->evaluateScript($script);    
     }
 }

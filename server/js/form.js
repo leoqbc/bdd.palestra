@@ -2,9 +2,15 @@
  * Javascript bem Noob para o formulário
  * 
  */
+function hideAlerts() {
+    $('#success').hide();
+    $('#error').hide();
+}
+
 $('#cadastrar').click(function (event) {
     event.preventDefault();
     var erro;
+    var delay = 2000;
     erro = false;
     $('input').each(function () {
         if ($(this).val() == '') {
@@ -15,13 +21,13 @@ $('#cadastrar').click(function (event) {
 
     if (!erro) {
         setTimeout(function () {
-            $('#success').text('Cadastro realizado com sucesso');
-        }, 2000);
+            hideAlerts();
+            $('#success').text('Cadastro realizado com sucesso').show();
+        }, delay);
     }
 
     if (erro) {
-        $('#error').text('Erro ao cadastrar');
+        hideAlerts();
+        $('#error').text('Erro ao cadastrar').show();
     }
 });
-
-

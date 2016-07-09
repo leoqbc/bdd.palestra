@@ -57,7 +57,8 @@
                             </div>
                         </div>
                     </form>
-                    <h1 id="success"></h1>  
+                    <div class="alert alert-success" role="alert" style="display: none" id="success"></div>  
+                    <div class="alert alert-danger" role="alert" style="display: none" id="error"></div>  
                 </div>
             </div>
         </div>

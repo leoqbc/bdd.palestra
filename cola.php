@@ -1,3 +1,6 @@
+./behat -dl
+
+
 #language: pt
 
 Funcionalidade: Cadastro de usuário
@@ -13,7 +16,7 @@ Funcionalidade: Cadastro de usuário
       E Eu preencho "telefone" com "11 9876-1234"
       E Eu preencho "email" com "teste@teste.com"
       Quando Eu pressiono "Cadastrar"
-      Então devo visualizar "Cadastro realizado com sucesso"
+      Então devo ver "Cadastro realizado com sucesso"
 
    @javascript
    Esquema do Cenário: Multiplos cadastros
@@ -39,4 +42,24 @@ Funcionalidade: Cadastro de usuário
       Dado Eu estou na página de entrada
       E rodo um javascript aqui
       E aguardo 10 segundos
+
+
+
+
+    /**
+     * @Then devo visualizar :arg1
+     */
+    public function devoVisualizar($arg1)
+    {
+        $page = $this->getSession()->getPage();
+        $success = $page->find('css', '#success');
+        
+        $this->spin(function () use ($success) {
+            return $success->isVisible();
+        });
+
+        if ($success->getText() != $arg1) {
+            throw new Exception('Texto não confere');
+        }
+    }
 
