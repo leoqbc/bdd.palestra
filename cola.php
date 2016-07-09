@@ -63,3 +63,14 @@ Funcionalidade: Cadastro de usuário
         }
     }
 
+links:
+
+Behat: behat.org
+
+Gherkin: http://docbehat.readthedocs.io/pt/latest/guides/1.gherkin.html
+
+Mink: mink.behat.org
+
+Selenium: www.seleniumhq.org
+
+10 dicas valiosas: http://www.tentacode.net/10-tips-with-behat-and-mink
